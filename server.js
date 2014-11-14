@@ -55,7 +55,16 @@ app.get('/favicon.ico', views.faviconerror);
 
 // Render the different views for the different apps
 app.get('/', views.home);
+app.get('/home', views.home);
+app.get('/login', views.login);
+app.get('/sandbox', views.sandbox);
+app.get('/inventory', views.inventory);
+app.get('/production', views.production);
 
+// Load / Update / Delete stuff with mongo
+app.get('/rest/articles', articles.getarticles);
+app.get('/rest/article_id', articles.getOnearticle);
+app.get('/rest/resources', resources.getresources);
 
 
 // Posts
