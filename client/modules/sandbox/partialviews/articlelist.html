@@ -1,0 +1,138 @@
+<div class="panel-body" ng-controller="CategoryController">
+	<div>
+	    <a href="#/articles/newarticle">
+	    	<span>Add new article <i class="fa fa-plus-circle"></i></span>
+	    </a>
+	    <br>
+	    <hr>
+	    <div class="container col-sm-4">
+	      <div class="col-xs-8">
+		      <form role="search">
+		        <div class="form-group">
+		          <input type="text" class="form-control" 
+		          		 placeholder="Search" ng-model="query">
+		        </div>
+		      </form>
+	      </div>
+	      <div mz-button color="#2e302c" active="todos.active" xs-size="2" sm-size="4">
+	      	<i tooltip="Todos" tooltip-popup-delay="800">T</i></div>
+	    </div>	    
+	    <div ng-repeat="category in categories">
+	    	<div mz-button color="{{category.color}}" active="category.active" 
+	    		 xs-size="2" sm-size="1"
+	    		 ng-click="toggleCategory($index)"> 
+	    		
+	    		<i class="fa {{category.symbol}}" 
+	    		   tooltip="{{category.name}}" tooltip-popup-delay="800">
+	    		</i>
+
+	    	</div>
+	    </div>
+	</div>
+    
+    <br>
+    <hr>
+
+	<div ng-repeat="category in categories">
+
+	    <mzpanel title="{{category.name}}" color="{{category.color}}" active="{{category.active}}"> 
+			<table class="table table-striped table-hover table-bordered">
+				<thead style="background-color: {{category.color}}">
+				  <th ng-click="sort('Code')">Code </th>
+				  <th ng-click="sort('Description')">Description </th>
+				  <th class="hidden-xs">Category</th>
+				  <th ng-click="sort('Subcategory')"
+				  	  class="hidden-xs">Subcategory</th>
+				</thead>
+				<tr ng-repeat="article in articles | filter:category.name | 
+							   orderBy:predicate:reverse | 
+							   filter: query | limitTo: limit" 
+		          	ng-click="selectArticle(article, $event)">
+			    	<td>{{article.Code}}</td>
+			    	<td>{{article.Description}}</td>
+			    	<td class="hidden-xs">{{article.Category}}</td>
+			    	<td class="hidden-xs">{{article.Subcategory}}</td>
+		    	</tr>
+		    </table>
+			<div class="btn btn-grey col-xs-5 col-sm-4 col-md-2"
+				 ng-click="limit = 5"> 
+				 Show 5 
+			</div> 
+			<div class="btn btn-grey pull-right col-xs-6 col-sm-4 col-md-2"
+				 ng-click="limit = limit + 20"> 
+				 Show more... 
+			</div> 
+		</mzpanel>
+
+    </div>
+
+	<mzpanel title="Todos" color="#2e302c" active="{{todos.active}}">
+		<table class="table table-striped table-hover table-bordered">
+			<thead style="background-color: #2e302c">
+			  <th ng-click="sort('Code')">Code </th>
+			  <th ng-click="sort('Description')">Description </th>
+			  <th ng-click="sort('Category')"
+			  	  class="hidden-xs">Category</th>
+			  <th ng-click="sort('Subcategory')"
+			  	  class="hidden-xs">Subcategory</th>
+			</thead>
+			<tr ng-repeat="article in articles | orderBy:predicate:reverse |
+							filter: query | limitTo: limit" 
+	          	ng-click="selectArticle(article, $event)">
+		    	<td>{{article.Code}}</td>
+		    	<td>{{article.Description}}</td>
+				<td class="hidden-xs">{{article.Category}}</td>
+		    	<td class="hidden-xs">{{article.Subcategory}}</td>
+	    	</tr>
+		</table>
+		<div class="btn btn-grey col-xs-5 col-sm-4 col-md-2"
+			 ng-click="limit = 5"> 
+			 Show 5 
+		</div> 
+		<div class="btn btn-grey pull-right col-xs-6 col-sm-4 col-md-2"
+			 ng-click="limit = limit + 40"> 
+			 Show more... 
+		</div> 	
+	</mzpanel>
+</div>
+
+
+<style type="text/css">
+	.fade-hide {
+	  -webkit-transition:all linear 0.5s;
+	  transition:all linear 0.5s;
+	}
+
+	.fade-hide.ng-hide {
+	  opacity:0;
+	}
+
+	.slide-hide, .slide-show {
+	    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+	}
+	.slide-hide {
+	    position: relative;
+	    top: 0;
+	}
+	.slide-hide.ng-hide {
+	    position: absolute;
+	    top: -100px;
+	}
+
+	.btn-grey {
+		background-color: lightgrey;
+	}
+	
+	.btn-grey:hover {
+		background-color: darkgrey;
+	}
+
+	thead th:hover {
+		cursor: pointer;
+	}
+
+</style>
+    

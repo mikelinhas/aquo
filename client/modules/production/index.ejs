@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Cycnus | BOM</title>
+
+    <!-- ICON -->
+    <link href="/swanicon.ico" rel="icon" type="image/x-icon" />
+
+    <!-- CSS  -->
+    <link rel="stylesheet" href="libs/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="libs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/css/style.css">
+
+    <!-- JavaScripts -->
+    <script src="libs/js/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.js"></script>
+
+
+    <!-- Javscript and CSS for the AngularTree -->
+    <link rel="stylesheet" href="modules/production/tree/angular-ui-tree.min.css">
+    <link rel="stylesheet" href="modules/production/tree/tree.css">
+    <link rel="stylesheet" href="modules/production/tree/demo.css">
+    <script type="text/javascript" src="modules/production/tree/angular-ui-tree.js"></script>
+
+
+    <!-- Page Specific JS -->
+    <script type="text/javascript" src="modules/production/angular/app.js"></script>
+    <script type="text/javascript" src="modules/production/angular/controllers.js"></script>
+    <script type="text/javascript" src="modules/production/angular/services.js"></script>
+    <script type="text/javascript" src="modules/production/angular/directives.js"></script>
+
+  </head>
+  <body ng-controller="treeCtrl">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-static-top" 
+         role="navigation"
+         ng-include src="'modules/production/partialviews/navbar.html'">
+    </div>
+
+    <div class="container">
+      <h1 class="page-header">Bill Of Materials</h1>
+      
+      <div class="row">
+        <div class="col-lg-6" style="margin-right: 16px;">
+          <div class="container" ng-hide="selectedarticle && data.length > 0">
+            <div class='col-md-4'>
+              <h4>Search Article</h4>
+              <pre>Model: {{Code | json}}</pre>
+              <input type="text" ng-model="Code" typeahead="article.Code for article in articles | filter:$viewValue | limitTo:8" class="form-control">
+            </div>
+          </div>
+
+          <br>
+
+          <div class="container" ng-hide="selectedarticle && data.length > 0">
+            <a class="btn btn-success" ng-click="selectarticle(Code)"> Añadir al BOM </a>
+          </div>
+          
+          <hr ng-hide="selectedarticle && data.length > 0">
+
+          <div class="container" ng-show="selectedarticle && data.length > 0" >
+            <div class="col-md-6">
+              <h3><span class="fa fa-sitemap fa-lg"></span> {{selectedarticle.Code}}
+              </h3>
+              <a href="" class="btn btn-success pull-right" 
+                 ng-click="collapseAll()">Collapse all
+              </a>
+              <a href="" class="btn btn-success pull-right" 
+                 ng-click="expandAll()">Expand all
+              </a>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="row">
+
+            <div ng-show="selectedarticle && data.length > 0"> 
+              <h3>Errors</h3>
+              <ul class="nav nav-pills">
+                <li ng-repeat="error in BOMStuff.errors">
+                  <a href="" tooltip="{{error.description}}" tooltip-popup-delay="800">
+                    <div mz-badge errors="{{error.amount}}"> 
+                      {{error.amount}}</div>
+                    {{error.name}}
+                  </a>
+                </li>
+              </ul>
+            </div>  
+
+            <div ui-tree id="tree-root">
+              <ol ui-tree-nodes ng-model="data">
+                <li ng-repeat="item in data" ui-tree-node ng-include="'modules/production/partialviews/BOMLayout.html'">
+                </li>
+              </ol>
+            </div>
+            
+            <br>
+            
+            <div class="btn btn-success" ng-hide="BOMStuff.errors[6].amount">
+              Add BOM
+            </div>
+
+
+          </div>
+
+          <hr>
+
+        </div>
+
+
+        <div>
+          <h3>BOM in JSON (MongoDB)</h3>
+          <pre class="code">{{ data | json }}</pre>
+        </div>
+
+      </div>
+
+
+
+
+    </div>
+
+
+    <!--[if IE 8]>
+      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.min.js"></script>
+    <![endif]-->
+
+  </body>
+</html>

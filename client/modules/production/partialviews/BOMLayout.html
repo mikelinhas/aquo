@@ -1,0 +1,63 @@
+<div ui-tree-handle class="tree-node tree-node-content {{item.Type}}">
+  
+  <a class="btn btn-success btn-xs" 
+     ng-if="item.BOM && item.BOM.length > 0" 
+     nodrag ng-click="toggle(this)">
+
+    <span class="fa" 
+           ng-class="{'fa-chevron-right': collapsed, 'fa-chevron-down': !collapsed}">
+    </span>
+  </a>
+
+  {{item.Code}}
+
+  <a class="pull-right btn btn-danger btn-xs" 
+     nodrag ng-click="remove(this)"
+     tooltip="Delete"
+     tooltip-popup-delay="800">
+
+     <span class="fa fa-remove"></span>
+
+  </a>
+
+  <a class="pull-right btn btn-primary btn-xs" 
+     nodrag ng-click="newMaterial(this)" 
+     ng-hide="item.Type === 'resource'"     
+     tooltip="Add Material"
+     tooltip-popup-delay="800"
+     style="margin-right: 8px;">
+
+     <span class="fa fa-leaf"></span>
+
+  </a>
+
+  <a class="pull-right btn btn-primary btn-xs" 
+     nodrag ng-click="newResource(this)" 
+     tooltip="Add Resource"
+     tooltip-popup-delay="800"
+     style="margin-right: 8px;">
+
+     <span class="fa fa-wrench"></span>
+
+  </a>
+
+  <a class="pull-right btn btn-warning btn-xs"
+     ng-hide="item.Type === 'primary'"     
+     nodrag ng-click="edit(this)"
+     tooltip="Edit"
+     tooltip-popup-delay="800">
+
+     <span class="fa fa-pencil"></span>
+
+  </a>
+
+</div>
+
+<ol ui-tree-nodes="" ng-model="item.BOM" 
+    ng-class="{hidden: collapsed}">
+
+  <li ng-repeat="item in item.BOM" ui-tree-node 
+      ng-include="'modules/production/partialviews/BOMLayout.html'">
+  </li>
+
+</ol>

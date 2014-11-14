@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Cycnus | Sandbox </title>
+
+    <!-- ICON -->
+    <link href="/swanicon.ico" rel="icon" type="image/x-icon" />
+
+    <!-- CSS  -->
+    <link rel="stylesheet" href="libs/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Rajdhani:400,500|Poiret+One|Philosopher|Neucha|Ubuntu:300,400|Josefin+Sans|Raleway:400,300|Didact+Gothic|Handlee' rel='stylesheet' type='text/css'>
+
+    
+    <!-- Page Specific CSS -->
+
+
+    <!-- JavaScripts -->
+    <script rel="javascript" src="libs/js/jquery.min.js"></script>
+    <script rel="javascript" src="libs/js/bootstrap.min.js"></script>
+    <script rel="javascript" src="libs/js/angular.min.js"></script>
+    <script rel="javascript" src="libs/js/angular-route.min.js"></script>
+    <script rel="javascript" src="libs/js/angular-mocks.js"></script>
+    <script rel="javascript" src="libs/js/angular-resource.min.js"></script>
+    <script rel="javascript" src="libs/js/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- Page Speciic JS -->
+    <script rel="javascript" src="modules/inventory/angular/app.js"></script>
+    <script rel="javascript" src="modules/inventory/angular/controllers.js"></script>
+    <script rel="javascript" src="modules/inventory/angular/services.js"></script>
+
+
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-static-top" 
+         role="navigation"
+         ng-include src="'modules/inventory/partialviews/navbar.html'">
+    </div>
+
+    <div class="container bg-white">
+      <div ng-view>
+      </div>
+    </div>
+
+  </body>
+</html>

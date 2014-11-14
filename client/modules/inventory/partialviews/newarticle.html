@@ -1,0 +1,45 @@
+<div>
+	<ol class="breadcrumb">
+	  <li><a href="#/articles">articles</a></li>
+	  <li><a href="#/articles-{{article.Category}}">{{new_article.Category}}</a></li>
+	  <li class="active">{{new_article._id}}</li>
+	</ol>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+		    <h3 class="panel-title"><strong>{{new_article.Code}}</strong> - {{new_article.Description}}</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-6">
+					<ul>
+						<li><strong> Code : </strong>
+							<input type="text" class="form-control" ng-model="new_article.Code">
+						</li>
+
+						<li><strong> Description : </strong>
+							<input type="text" class="form-control" ng-model="new_article.Description">
+						</li>
+
+						<li><strong> Category : </strong>
+							<input type="text" class="form-control" ng-model="new_article.Category">
+						</li>
+
+						<li><strong> Subcategory : </strong>
+							<input type="text" class="form-control" ng-model="new_article.Subcategory">
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-6" ng-show="new_article.imgsrc">
+					<img class="media-object" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="pull-right">
+					<button class="btn btn-success" type="button" ng-click="addarticle()">
+					    Add
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
