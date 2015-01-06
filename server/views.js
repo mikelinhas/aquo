@@ -6,6 +6,10 @@ exports.faviconerror = function (req,res) {
     res.json("I dont know what to do");
 };
 
+exports.login = function(req, res) {
+    res.render('main_views/login');
+};
+
 exports.home = function(req, res) {
     res.render('main_views/home');
 };

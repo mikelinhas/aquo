@@ -4,7 +4,6 @@
 
 var express = require('express');
 var morgan = require('morgan');
-var http = require('http');
 var path = require('path');
 var ejslocals = require('ejs-locals');
 var mongo = require('mongodb');
@@ -14,6 +13,15 @@ var mongodb = require('./server/mongo');
 var views = require('./server/views');
 var articles = require('./server/articles');
 var resources = require('./server/resources');
+
+//Middleware (used to be bundled with Express 3.0)
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var methodOverride = require('method-override');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var errorHandler = require('errorhandler');
 
 //Express
 var app = module.exports = express();
@@ -26,18 +34,23 @@ var app = module.exports = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/client');
 app.set('view engine', 'ejs');
-app.use(morgan('dev'));
-app.use(express.bodyParser());
-app.use(express.methodOverride());
+// app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(logger('dev'));
+app.use(methodOverride());
+app.use(session({ resave: true,
+                  saveUninitialized: true,
+                  secret: 'uwotm8' }));
+// app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer());
 app.use(express.static(path.join(__dirname, 'client')));
-app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded()); // to support URL-encoded bodies
 
 var env = process.env.NODE_ENV || 'development';
 
 // development only
 if (env === 'development') {
-    app.use(express.errorHandler());
+    app.use(errorHandler());
 }
 
 // production only
@@ -54,7 +67,7 @@ app.get('/favicon.ico', views.faviconerror);
 
 
 // Render the different views for the different apps
-app.get('/', views.home);
+app.get('/', views.login);
 app.get('/home', views.home);
 app.get('/login', views.login);
 app.get('/sandbox', views.sandbox);
@@ -86,7 +99,7 @@ mongodb.init(function (err, result) {
 		console.log(err);
 	} else {
 		console.log("Connected to MongoDB! Yay!")
-		http.createServer(app).listen(app.get('port'), function() {
+		app.listen(app.get('port'), function() {
 		    console.log('Express server listening on port ' + app.get('port'));
 		});
 	}

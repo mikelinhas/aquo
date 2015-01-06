@@ -5,7 +5,7 @@ var Server = mongo.Server;
 var Db     = mongo.Db;
 var BSON   = mongo.BSONPure;
 var MongoClient = mongo.MongoClient;
-var MONGOHQ_URL="mongodb://mike:1234@kahana.mongohq.com:10029/app28981693";
+var MONGOHQ_URL="mongodb://mike:1234@dogen.mongohq.com:10023/app31033205";
 var db;
 
 // Init

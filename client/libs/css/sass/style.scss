@@ -1,89 +1,19 @@
 @import "bootstrap";
 
-body {
-  background-color: #dedede;
+.center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.bg-white {
-  padding: 10px 10px 0px 10px;
-  background-color: white;
-  border-radius: 10px;
+.bottom-right {
+    position:absolute;
+    bottom:10%;
+    right:2%;
 }
 
-.panel {
-  border: 0px solid transparent;
-}
-
-.form-control:focus {
-  border-color: #aecfb5;
-}
-
-thead {
-  border: 1.5px solid #4a7854;
-  background-color: #4a7854;
-  >tr >th {
-    color: white;
-    font-weight: normal;
-  }
-}
-
-.mz-itworked {
-  color: green;
-}
-
-.navbar-default {
-  .navbar-nav {
-    > li > a {
-      font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-      > i {
-        padding: 5px;
-      }
-      &:hover,
-      &:focus {
-        background-color: transparent;
-        >span {
-          border-bottom: 2px solid white;
-        }
-      }
-    }
-    > .active > a {
-      &,
-      &:hover,
-      &:focus {
-        background-color: transparent;
-      }
-      > i {
-        padding: 5px;
-      }
-      > span {
-        border-bottom: 2px solid white;
-      }
-    }
-  }
-  .navbar-header {
-    > button {
-      border-color: transparent;
-      &:hover {
-        background-color: #15401f;
-      }
-    }
-  }
-}
-
-.fa-yelp {
-  color: white;
-}
-
-a {
-  color: #105720;
-}
-
-.col-centered {
-  text-align: center;
-}
-
-#limitset {
-  margin-right: 10px;
-  text-align: right;
-  padding-bottom: 10px;
+.bottom-center {
+  position: absolute;
+  bottom: 5%;
+  right: 10%;
 }

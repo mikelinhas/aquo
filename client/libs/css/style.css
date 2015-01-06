@@ -4369,10 +4369,9 @@ tbody.collapse.in {
 .navbar-brand {
   float: left;
   padding: 15px 15px;
-  font-size: 54px;
+  font-size: 18px;
   line-height: 20px;
   height: 50px;
-  font-family: Papyrus, fantasy;
 }
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
@@ -6693,79 +6692,20 @@ button.close {
     display: none !important;
   }
 }
-body {
-  background-color: #dedede;
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.bg-white {
-  padding: 10px 10px 0px 10px;
-  background-color: white;
-  border-radius: 10px;
+.bottom-right {
+  position: absolute;
+  bottom: 10%;
+  right: 2%;
 }
 
-.panel {
-  border: 0px solid transparent;
-}
-
-.form-control:focus {
-  border-color: #aecfb5;
-}
-
-thead {
-  border: 1.5px solid #4a7854;
-  background-color: #4a7854;
-}
-thead > tr > th {
-  color: white;
-  font-weight: normal;
-}
-
-.mz-itworked {
-  color: green;
-}
-
-.navbar-default .navbar-nav > li > a {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-}
-.navbar-default .navbar-nav > li > a > i {
-  padding: 5px;
-}
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  background-color: transparent;
-}
-.navbar-default .navbar-nav > li > a:hover > span, .navbar-default .navbar-nav > li > a:focus > span {
-  border-bottom: 2px solid white;
-}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  background-color: transparent;
-}
-.navbar-default .navbar-nav > .active > a > i {
-  padding: 5px;
-}
-.navbar-default .navbar-nav > .active > a > span {
-  border-bottom: 2px solid white;
-}
-.navbar-default .navbar-header > button {
-  border-color: transparent;
-}
-.navbar-default .navbar-header > button:hover {
-  background-color: #15401f;
-}
-
-.fa-yelp {
-  color: white;
-}
-
-a {
-  color: #105720;
-}
-
-.col-centered {
-  text-align: center;
-}
-
-#limitset {
-  margin-right: 10px;
-  text-align: right;
-  padding-bottom: 10px;
+.bottom-center {
+  position: absolute;
+  bottom: 5%;
+  right: 10%;
 }
