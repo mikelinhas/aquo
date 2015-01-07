@@ -17,3 +17,15 @@
   bottom: 5%;
   right: 10%;
 }
+
+.btn-grey {
+	background-color: lightgrey;
+}
+
+.btn-grey:hover {
+	background-color: darkgrey;
+}
+
+thead th:hover {
+	cursor: pointer;
+}

@@ -1,48 +1,91 @@
-<div class="row" ng-controller="PaginationController">
-
-	<div class="container col-centered">
-    	<ul class="pagination">
-			<li ng-click="pgdown()"><a href="">&laquo;</a></li>
-    		<li ng-repeat="page in pages" 
-        		ng-click="selectPage(page)" 
-        		ng-class="{active: page == PaginationStuff.selectedpage}">
-              <a href="" >{{page}}</a>
-			</li>
-	    	<li ng-click="pgup()"><a href="">&raquo;</a></li>
-    	</ul>
+<div class="panel-body" ng-controller="CategoryController">
+	<div>
+	    <a href="#/articles/newarticle">
+	    	<span>Add new article <i class="fa fa-plus-circle"></i></span>
+	    </a>
+	    <br>
+	    <hr>
+        <div class="col-sm-4 col-xs-8">
+		    <form role="search">
+		        <div class="form-group">
+		          <input type="text" class="form-control" 
+		          		 placeholder="Search" ng-model="query">
+		        </div>
+		    </form>
+		</div>
+	    <div class="btn"
+		 style="background-color: rgb(139, 216, 139)"
+		 ng-click=""> 
+		 Extraer Excel 
+		</div> 
+	         
 	</div>
+
+    <br>
+    <hr>
+
+	<mzpanel title="Todos" color="#2e302c" active="{{todos.active}}">
+		<table class="table table-striped table-hover table-bordered">
+			<thead style="background-color: rgb(182, 180, 180)">
+			  <th ng-click="sort('Code')">Código </th>
+			  <th ng-click="sort('Description')">Descripción </th>
+			  <th ng-click="sort('Category')"
+			  	  class="hidden-xs">Categoría</th>
+			  <th ng-click="sort('Subcategory')"
+			  	  class="hidden-xs">Subcategoría</th>
+			</thead>
+			<tr ng-repeat="article in articles | orderBy:predicate:reverse |
+							filter: query | limitTo: limit" 
+	          	ng-click="selectArticle(article, $event)">
+		    	<td>{{article.Code}}</td>
+		    	<td>{{article.Description}}</td>
+				<td class="hidden-xs">{{article.Category}}</td>
+		    	<td class="hidden-xs">{{article.Subcategory}}</td>
+	    	</tr>
+		</table>
+		<div class="btn btn-grey col-xs-5 col-sm-4 col-md-2"
+			 ng-click="limit = 5"> 
+			 Mostrar 5 
+		</div> 
+		<div class="btn btn-grey pull-right col-xs-6 col-sm-4 col-md-2"
+			 ng-click="limit = limit + 40"> 
+			 Mostrar más... 
+		</div> 	
+	</mzpanel>
+
+	<div ng-repeat="category in categories">
+
+
+	    <mzpanel title="{{category.name}}" color="{{category.color}}"> 
+			<table class="table table-striped table-hover table-bordered">
+				<thead style="background-color: rgb(182, 180, 180)">
+				  <th ng-click="sort('Code')">Código </th>
+				  <th ng-click="sort('Description')">Descripción </th>
+				  <th class="hidden-xs">Categoría</th>
+				  <th ng-click="sort('Subcategory')"
+				  	  class="hidden-xs">Subcategoría</th>
+				</thead>
+				<tr ng-repeat="article in articles | filter:category.name | 
+							   orderBy:predicate:reverse | 
+							   filter: query | limitTo: limit" 
+		          	ng-click="selectArticle(article, $event)">
+			    	<td>{{article.Code}}</td>
+			    	<td>{{article.Description}}</td>
+			    	<td class="hidden-xs">{{article.Category}}</td>
+			    	<td class="hidden-xs">{{article.Subcategory}}</td>
+		    	</tr>
+		    </table>
+			<div class="btn btn-grey col-xs-5 col-sm-4 col-md-2"
+				 ng-click="limit = 5"> 
+				 Mostrar 5 
+			</div> 
+			<div class="btn btn-grey pull-right col-xs-6 col-sm-4 col-md-2"
+				 ng-click="limit = limit + 20"> 
+				 Mostrar más... 
+			</div> 
+		</mzpanel>
+
+    </div>
 </div>
 
-<div class="panel-body">
-	<div>
-	    <div class="col-sm-4">
-	      <form role="search">
-	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Search" ng-model="query">
-	        </div>
-	      </form>
-	    </div>
-	    <a href="#/articles/newarticle"><i class="fa fa-plus-circle fa-2x"></i></a>
-	    <div class="col-sm-4 pull-right">
-	            {{CategoryStuff.selectedcategory}} <a href="#/categories" ng-click="selectCategory(0)"><i class="fa fa-bomb fa-2x"></i></a> Esta bomba te lleva a la pagina de filtros
-	    </div>
-	</div>
     
-    <table class="table table-striped table-hover table-bordered">
-		<thead>
-		  <th>Code </th>
-		  <th>Description </th>
-		  <th>Category</th>
-		  <th>Subcategory</th>
-		</thead>
-		<tr ng-repeat="article in ArticleStuff.filteredarticles | filter:query" 
-          	ng-click="selectArticle(article)" 
-          	ng-class="{active: article.Code == ArticleStuff.selectedarticle}"
-          	ng-show="paginateArticle($index)">
-	    	<td>{{article.Code}}</td>
-	    	<td>{{article.Description}}</td>
-	    	<td>{{article.Category}}</td>
-	    	<td>{{article.Subcategory}}</td>
-    	</tr>
-    </table>
- </div>

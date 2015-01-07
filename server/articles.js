@@ -22,9 +22,9 @@ var mongodb = require('./mongo')
 		mongodb.findAll(collectionName, function (err,result) {
 			if (err){
 				console.log(err);
-				res.send(500, {});
+				res.status(500).send({});
 			} else {
-				res.send(200, result);
+				res.status(200).send(result);
 			}
 		});
 	}
@@ -36,9 +36,9 @@ var mongodb = require('./mongo')
 		mongodb.findById(collectionName, id, function (err,result) {
 			if (err){
 				console.log(err);
-				res.send(500, {});
+				res.status(500).send({});
 			} else {
-				res.send(200, result);
+				res.status(200).send(result);
 			}
 		});
 	}
@@ -61,10 +61,10 @@ exports.addarticle = function(req, res) {
     mongodb.create('articles', article, function (err, result) {
     	if (err) {
     		console.log (err);
-    		res.send(500, {});
+    		res.status(500).send({});
     	} else {
     		console.log ("article was added to mongodb.. check it out");
-    		res.send(200, {});
+    		res.status(200).send({});
     	}
     });
 
@@ -79,10 +79,10 @@ exports.deletearticle = function (req, res) {
 	mongodb.delete ("articles", id, function (err,result) {
 		if (err){
 			console.log(err);
-			res.send(500, {});
+    		res.status(500).send({});
 		} else {
 			console.log(id + "was deleted from the mongoDB");
-			res.send(200, {});
+    		res.status(200).send({});
 		}
 	});
 };

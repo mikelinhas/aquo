@@ -2,44 +2,14 @@
 
 var app = angular.module('app');
 
-app.service('PaginationService', function (filterFilter, $rootScope, ArticleService){
+app.service('CategoryService', function() {
 
-	this.ArticleStuff = ArticleService;
-	this.selectedpage = 1;
-
-	this.recountpages = function () {
-		this.numberofpages = Math.floor(this.ArticleStuff.filteredarticles.length/20+1);
-		pages = [];
-		for (i = 0; i < this.numberofpages; i++) {
-			pages.push(i+1);
-		}
-		this.pages = pages;		
-		return this.pages;
-	}
-
-	this.select = function (pagenumber) {
-		this.selectedpage = pagenumber;
-		return this.selectedpage;
-	}
-
-});
-
-app.service('CategoryService', function(/*note that a service can include another service*/) {
-
-	this.categories = [{name:'Embalaje', symbol:'fa fa-archive'},
-					  {name:'Producto Quimico', symbol:'fa-flask'},
-					  {name:'Producto Intermedio', symbol:'fa-cogs'},
-					  {name:'Producto Final', symbol:'fa-shopping-cart'},
-					  {name:'Film', symbol:'fa-cab'},
-					  {name: 'Cliente', symbol: 'fa-user'}];
-
-
-	this.selectedcategory = 0;
-
-	this.select = function (category) {
-		this.selectedcategory = category;
-		return this.selectedcategory;
-	}
+	this.categories = [{name:'Embalaje', symbol:'fa fa-archive', color:'#254A6B'},
+					  {name:'Producto Quimico', symbol:'fa-flask', color:'#254A6B'},
+					  {name:'Producto Intermedio', symbol:'fa-cogs', color:'#254A6B'},
+					  {name:'Producto Final', symbol:'fa-shopping-cart', color:'#254A6B'},
+					  {name:'Film', symbol:'fa-cab', color:'#254A6B'},
+					  {name: 'Cliente', symbol: 'fa-user', color:'#254A6B'}];
 
 });
 
@@ -62,34 +32,9 @@ app.service('ArticleService', function ($rootScope, $http, HTTPService, filterFi
         });
 	};
 
-	this.query = function (query, selectedcategory) {
-		this.filteredarticles = filterFilter($rootScope.articles, selectedcategory);
-		this.filteredarticles = filterFilter(this.filteredarticles, query);
-	};
-
 	this.lookforId = function (id) {
 		var article = filterFilter($rootScope.articles, id);
 		return article[0];
-	};
-
-	this.push = function (articlesJSON) {
-		
-		var articles = JSON.parse(articlesJSON);
-
-
-		for (i = 0; i< articles.length; i++) {
-
-			var new_article = {Code:articles[i].CODIGO,Description:articles[i].PRODUCTO,Category:articles[i].CATEGORIA,Subcategory:articles[i].SUBCATEGORIA};
-			$http.post('/rest/articles/add', new_article)
-				.success(function (res) {
-					console.log('Express mgs: ' + res);
-				})
-				.error(function(res) {
-					console.log('musta been an error');
-					// console.log('Express msg: ' + res.body);
-			});
-			console.log (new_article);
-		};
 	};
 
 	function deleteArticle (id) {
@@ -100,10 +45,30 @@ app.service('ArticleService', function ($rootScope, $http, HTTPService, filterFi
 
 });
 
+app.service('ArticleViewService', function ($rootScope, HTTPService) {
+
+
+    // GET THE ARTICLES
+    $rootScope.article = [];
+
+    this.loadRemoteData = function (id) {
+        HTTPService.getOneArticle(id).then( function (response) {
+            $rootScope.article = response;
+        });
+    };
+
+    // function deleteArticle (id) {
+    //     HTTPService.deleteArticle(id).then( function (response) {
+    //         return response;
+    //     });
+    // };
+
+});
+
 app.service('HTTPService', function ($http, $q) {
 
 	return({getArticles: getArticles,
-			//getOneArticle: getOneArticle,
+			getOneArticle: getOneArticle,
 			addArticle: addArticle,
 			deleteArticle: deleteArticle});
 
@@ -158,13 +123,14 @@ app.service('HTTPService', function ($http, $q) {
         return( request.then( handleSuccess, handleError ) );
     }
 
-    function getOneArticles() {
+    function getOneArticle(id) {
         var request = $http({
             method: "get",
-            url: "/rest/articles",
+            url: "/rest/article_id",
             params: {
-                action: "get"
-            }
+                action: "get",
+                id: id
+            },
         });
         return( request.then( handleSuccess, handleError ) );
     }

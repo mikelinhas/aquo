@@ -6,10 +6,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> Cycnus | Sandbox </title>
+    <title> aquo | Inventory </title>
 
     <!-- ICON -->
-    <link href="/swanicon.ico" rel="icon" type="image/x-icon" />
+    <link href="/drop.ico" rel="icon" type="image/x-icon" />
 
     <!-- CSS  -->
     <link rel="stylesheet" href="libs/css/font-awesome.min.css">
@@ -28,11 +28,15 @@
     <script rel="javascript" src="libs/js/angular-mocks.js"></script>
     <script rel="javascript" src="libs/js/angular-resource.min.js"></script>
     <script rel="javascript" src="libs/js/ui-bootstrap-tpls.min.js"></script>
+    <script rel="javascript" src="libs/js/angular-sanitize.min.js"></script>
+    <script rel="javascript" src="libs/js/ng-csv.min.js"></script>
+
 
     <!-- Page Speciic JS -->
     <script rel="javascript" src="modules/inventory/angular/app.js"></script>
     <script rel="javascript" src="modules/inventory/angular/controllers.js"></script>
     <script rel="javascript" src="modules/inventory/angular/services.js"></script>
+    <script rel="javascript" src="modules/inventory/angular/directives.js"></script>
 
 
   </head>
@@ -44,6 +48,17 @@
          ng-include src="'modules/inventory/partialviews/navbar.html'">
     </div>
 
+    <div class="container" ng-controller="TabsController">
+      <ul class="nav nav-pills" role="tablist">
+        <li ng-repeat="tab in tabs" 
+            ng-class="{active:isActiveTab(tab.n)}" 
+            ng-click="onClickTab(tab)"><a href="{{tab.url}}">{{tab.title}}</a>
+        </li>
+      </ul>
+    <hr>
+    </div>
+
+    
     <div class="container bg-white">
       <div ng-view>
       </div>
