@@ -6721,3 +6721,11 @@ button.close {
 thead th:hover {
   cursor: pointer;
 }
+
+mzslide {
+  text-align: center;
+}
+
+.btn-circle {
+  border-radius: 50px;
+}

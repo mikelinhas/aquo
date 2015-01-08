@@ -1,6 +1,6 @@
 <div>
 	<ol class="breadcrumb">
-	  <li><a href="#/articles"><i class="fa fa-undo"></i> articles</a></li>
+	  <li><a href="#/articles"><i class="fa fa-undo"></i> artículos</a></li>
 	  <li>{{article.Category}}</li>
 	  <li class="active">{{article._id}}</li>
 	</ol>
@@ -12,9 +12,9 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<ul>
-						<li><strong> Category : </strong>{{article.Category}}</li>
-						<li><strong> Subcategory : </strong>{{article.Subcategory}}</li>
-						<li> Last modified : {{article.Last_modified | date}}</li>
+						<li><strong> Categoría : </strong>{{article.Category}}</li>
+						<li><strong> Subcategoría : </strong>{{article.Subcategory}}</li>
+						<li> Última Modificación : {{article.Last_modified | date}}</li>
 					</ul>
 				</div>
 				<div class="col-sm-6" ng-show="article.imgsrc">
@@ -24,10 +24,12 @@
 			<div class="row">
 				<div class="pull-right">
 					<button class="btn btn-primary" type="button">
-					    Edit
+					    Editar
 					</button>
-					<button class="btn btn-danger" type="button" ng-click="deleteArticle(article._id)">
-					    Delete
+					<button class="btn btn-danger" type="button"
+							style="margin-right: 10px" 
+							ng-click="deleteArticle(article._id)">
+					    Borrar
 					</button>
 				</div>
 			</div>

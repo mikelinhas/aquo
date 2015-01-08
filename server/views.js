@@ -30,5 +30,8 @@ exports.production = function(req, res) {
     res.render('modules/production/index');
 };
 
+exports.settings = function(req, res) {
+    res.render('modules/settings/index');
+};
 
 

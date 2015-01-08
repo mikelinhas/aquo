@@ -1,7 +1,7 @@
 <div class="panel-body" ng-controller="CategoryController">
 	<div>
 	    <a href="#/articles/newarticle">
-	    	<span>Add new article <i class="fa fa-plus-circle"></i></span>
+	    	<span>Añadir un nuevo artículo <i class="fa fa-plus-circle"></i></span>
 	    </a>
 	    <br>
 	    <hr>
@@ -13,9 +13,9 @@
 		        </div>
 		    </form>
 		</div>
-	    <div class="btn"
+	    <div ng-controller="CSVController" class="btn"
 		 style="background-color: rgb(139, 216, 139)"
-		 ng-click=""> 
+		 ng-csv="getdata(articles)" filename="Articulos.csv" add-bom="true"> 
 		 Extraer Excel 
 		</div> 
 	         
@@ -50,7 +50,12 @@
 		<div class="btn btn-grey pull-right col-xs-6 col-sm-4 col-md-2"
 			 ng-click="limit = limit + 40"> 
 			 Mostrar más... 
-		</div> 	
+		</div>
+		<div class="btn btn-grey pull-right col-xs-6 col-sm-4 col-md-2"
+			 style="margin-right: 5px"
+			 ng-click="limit = limit + 4000"> 
+			 Mostrar Todos 
+		</div> 	 	
 	</mzpanel>
 
 	<div ng-repeat="category in categories">

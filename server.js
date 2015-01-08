@@ -73,6 +73,7 @@ app.get('/login', views.login);
 app.get('/sandbox', views.sandbox);
 app.get('/inventory', views.inventory);
 app.get('/production', views.production);
+app.get('/settings', views.settings);
 
 // Load / Update / Delete stuff with mongo
 app.get('/rest/articles', articles.getarticles);

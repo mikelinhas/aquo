@@ -28,14 +28,12 @@
     <script rel="javascript" src="libs/js/angular-mocks.js"></script>
     <script rel="javascript" src="libs/js/angular-resource.min.js"></script>
     <script rel="javascript" src="libs/js/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="libs/js/angular-animate.js"></script>
-
 
     <!-- Page Speciic JS -->
-    <script rel="javascript" src="modules/sandbox/angular/app.js"></script>
-    <script rel="javascript" src="modules/sandbox/angular/controllers.js"></script>
-    <script rel="javascript" src="modules/sandbox/angular/services.js"></script>
-    <script rel="javascript" src="modules/sandbox/angular/directives.js"></script>
+    <script rel="javascript" src="modules/settings/angular/app.js"></script>
+    <script rel="javascript" src="modules/settings/angular/controllers.js"></script>
+    <script rel="javascript" src="modules/settings/angular/services.js"></script>
+    <script rel="javascript" src="modules/settings/angular/directives.js"></script>
 
 
 
@@ -45,11 +43,21 @@
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-static-top" 
          role="navigation"
-         ng-include src="'modules/sandbox/partialviews/navbar.html'">
+         ng-include src="'modules/settings/partialviews/navbar.html'">
+    </div>
+
+    <div class="container" ng-controller="TabsController">
+      <ul class="nav nav-pills" role="tablist">
+        <li ng-repeat="tab in tabs" 
+            ng-class="{active:isActiveTab(tab.n)}" 
+            ng-click="onClickTab(tab)"><a href="{{tab.url}}">{{tab.title}}</a>
+        </li>
+      </ul>
+    <hr>
     </div>
 
     <div class="container bg-white">
-      <div ng-view>
+      <div ng-view style="margin-bottom: 20px">
       </div>
     </div>
 

@@ -4,8 +4,8 @@ var app = angular.module('app');
 
 app.controller('TabsController', ['$scope', '$location', function ($scope, $location) {
     $scope.tabs = [{n: '1', title: 'Dashboard', url: '#'},
-    			   {n: '2', title: 'Visualizar Stock', url: '#/stock'}, 
-    			   {n: '3', title: 'Actualizar Base de Datos', url: '#/articles'}];
+    			   {n: '2', title: 'Stock', url: '#/stock'}, 
+    			   {n: '3', title: 'Database', url: '#/articles'}];
     
     $scope.currentTab = '1';
 
@@ -25,7 +25,15 @@ app.controller('TabsController', ['$scope', '$location', function ($scope, $loca
 }])
 
 app.controller('CSVController', ['$scope', 'ArticleService', function ($scope, ArticleService) {
-
+	$scope.getdata = function (articles) {
+		var headers = [{Code: 'Código', 
+						Description: 'Descripción', 
+						Category: 'Categoría', 
+						Subcategory: 'Subcategoría',
+						_id: '_id'}];
+		var data = headers.concat(articles);
+		return data;
+	}
 }])
 
 app.controller('DashboardController', ['$scope', '$location', function ($scope,$location) {
