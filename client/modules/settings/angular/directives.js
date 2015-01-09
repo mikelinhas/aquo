@@ -8,7 +8,7 @@ app.directive("mzslide", function () {
     },
     transclude: true,
     template: 
-    "<div class=\"container col-xs-11 col-sm-5\" ng-show=\"Slide.slide == number\">" +
+    "<div ng-show=\"Slide.slide == number\">" +
     " <div ng-transclude></div> " +
     "</div>",
     controller: function ($scope, SlideService) {

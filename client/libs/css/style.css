@@ -6710,6 +6710,12 @@ button.close {
   right: 10%;
 }
 
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .btn-grey {
   background-color: lightgrey;
 }
@@ -6720,10 +6726,6 @@ button.close {
 
 thead th:hover {
   cursor: pointer;
-}
-
-mzslide {
-  text-align: center;
 }
 
 .btn-circle {
