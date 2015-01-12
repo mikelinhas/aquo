@@ -85,7 +85,8 @@ app.get('/rest/resources', resources.getresources);
 app.post('/rest/articles/add', articles.addarticle);
 
 // Delete
-app.delete('/rest/articles/delete', articles.deletearticle);
+app.delete('/rest/articles/delete', articles.delete);
+app.delete('/rest/articles/deleteall', articles.deleteall);
 
 // redirect all others to the index
 app.get('*', views.home); //no funciona

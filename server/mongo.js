@@ -75,6 +75,12 @@ var db;
         });
     };
 
+    exports.deleteall = function(collectionName, cb){
+        db.collection(collectionName, function(err, collection) {
+            collection.remove({}, cb);
+        });
+    };
+
 // Site
     exports.siteFindAll = function(collectionName, site, cb){
         site = site || "";

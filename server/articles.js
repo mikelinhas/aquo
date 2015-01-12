@@ -73,7 +73,7 @@ exports.addarticle = function(req, res) {
 
 // DELETE
 
-exports.deletearticle = function (req, res) {
+exports.delete = function (req, res) {
 	console.log (req.body);
 	var id = req.body.id;
 	mongodb.delete ("articles", id, function (err,result) {
@@ -86,6 +86,18 @@ exports.deletearticle = function (req, res) {
 		}
 	});
 };
+
+exports.deleteall = function (req, res) {
+	mongodb.deleteall ("articles", function (err,result) {
+		if (err) {
+			console.log(err);
+			res.status(500).send({});
+		} else {
+			console.log("articles collection is empty");
+			res.status(200).send({});
+		}
+	})
+}
 
 /*  
 

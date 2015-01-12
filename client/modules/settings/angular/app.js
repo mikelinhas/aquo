@@ -8,6 +8,14 @@ var app = angular.module('app', ['ngRoute','ui.bootstrap']);
 	  		templateUrl: '/modules/settings/partialviews/database.html',
 	  		controller: 'DatabaseController'
 	  	})
+	  	.when('/database/import', {
+	  		templateUrl: '/modules/settings/partialviews/database/import.html',
+	  		controller: 'ImportController'
+	  	})
+	  	.when('/database/erase', {
+	  		templateUrl: '/modules/settings/partialviews/database/erase.html',
+	  		controller: 'DeleteController'
+	  	})
 	  	.when('/user', {
 	  		templateUrl: '/modules/settings/partialviews/user.html',
 	  		controller: 'SettingsController'

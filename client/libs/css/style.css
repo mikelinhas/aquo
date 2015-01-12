@@ -6710,12 +6710,6 @@ button.close {
   right: 10%;
 }
 
-.center {
-  float: none;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .btn-grey {
   background-color: lightgrey;
 }
@@ -6729,5 +6723,5 @@ thead th:hover {
 }
 
 .btn-circle {
-  border-radius: 50px;
+  border-radius: 50%;
 }
