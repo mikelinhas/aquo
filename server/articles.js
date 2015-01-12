@@ -63,8 +63,26 @@ exports.addarticle = function(req, res) {
     		console.log (err);
     		res.status(500).send({});
     	} else {
+    		var _id = result[0]._id;
     		console.log ("article was added to mongodb.. check it out");
-    		res.status(200).send({});
+
+    	    var stock = [{
+    			Code: req.body.Code,
+    			Description: req.body.Description,
+    			Article_id: _id,
+    			Stock: {}
+    			}];
+
+    		mongodb.create('stock', stock, function (err,result) {
+    			if (err) {
+    				console.log(err);
+    				res.status(500).send({});
+    			} else {
+    				console.log(result)
+    				console.log("inventory was also added");
+    				res.status(200).send({});
+    			}
+    		});
     	}
     });
 
@@ -86,18 +104,6 @@ exports.delete = function (req, res) {
 		}
 	});
 };
-
-exports.deleteall = function (req, res) {
-	mongodb.deleteall ("articles", function (err,result) {
-		if (err) {
-			console.log(err);
-			res.status(500).send({});
-		} else {
-			console.log("articles collection is empty");
-			res.status(200).send({});
-		}
-	})
-}
 
 /*  
 

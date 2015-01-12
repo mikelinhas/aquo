@@ -60,7 +60,7 @@ app.service('ImportService', function (HTTPService, $location) {
 
     this.Addarticles = function () {
 		var added = 0;
-		for (var i = 1; i <= this.data.json.length - 1; i++) {
+		for (var i = 0; i <= this.data.json.length - 1; i++) {
 			var new_article = [];
 
 			new_article.Code = this.data.json[i].Code;
@@ -134,10 +134,10 @@ app.service('HTTPService', function ($http, $q) {
 		return( request.then( handleDeleteSuccess, handleError ))
 	}
 
-    function deleteAllArticles (id) {
+    function deleteAllArticles () {
         var request = $http({
             method: "delete",
-            url: "/rest/articles/deleteall",
+            url: "/rest/database/deleteall",
             params: {
                 action: "delete"
             },

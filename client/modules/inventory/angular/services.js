@@ -13,6 +13,17 @@ app.service('CategoryService', function() {
 
 });
 
+app.service('StockService', function ($rootScope, HTTPService) {
+    $rootScope.stock = [];
+    loadRemoteData();
+
+    function loadRemoteData () {
+        HTTPService.getStock().then( function (stock) {
+            $rootScope.stock = stock;
+        });
+    };
+});
+
 app.service('ArticleService', function ($rootScope, $http, HTTPService, filterFilter) {
 
 
@@ -68,6 +79,7 @@ app.service('ArticleViewService', function ($rootScope, HTTPService) {
 app.service('HTTPService', function ($http, $q) {
 
 	return({getArticles: getArticles,
+            getStock: getStock,
 			getOneArticle: getOneArticle,
 			addArticle: addArticle,
 			deleteArticle: deleteArticle});
@@ -123,6 +135,17 @@ app.service('HTTPService', function ($http, $q) {
         return( request.then( handleSuccess, handleError ) );
     }
 
+    function getStock() {
+        var request = $http({
+            method: "get",
+            url: "/rest/stock",
+            params: {
+                action: "get"
+            }
+        });
+        return( request.then( handleSuccess, handleError ) );
+    }
+
     function getOneArticle(id) {
         var request = $http({
             method: "get",
@@ -134,7 +157,6 @@ app.service('HTTPService', function ($http, $q) {
         });
         return( request.then( handleSuccess, handleError ) );
     }
-
 
     function handleSuccess( response ) {
 

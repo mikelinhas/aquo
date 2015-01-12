@@ -8,6 +8,10 @@ var app = angular.module('app', ['ngRoute','ui.bootstrap', 'ngSanitize', 'ngCsv'
 	  		templateUrl: '/modules/inventory/partialviews/dashboard.html',
 	  		controller: 'DashboardController'
 	  	})
+	  	.when('/stock', {
+	  		templateUrl: '/modules/inventory/partialviews/stock.html',
+	  		controller: 'StockController'
+	  	})
 	  	.when('/articles', {
 	  		templateUrl: '/modules/inventory/partialviews/articlelist.html',
 	  		controller: 'ArticleListController'

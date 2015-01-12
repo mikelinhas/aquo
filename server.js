@@ -12,7 +12,9 @@ var mongo = require('mongodb');
 var mongodb = require('./server/mongo');
 var views = require('./server/views');
 var articles = require('./server/articles');
+var stock = require('./server/stock');
 var resources = require('./server/resources');
+var database = require('./server/database');
 
 //Middleware (used to be bundled with Express 3.0)
 var favicon = require('serve-favicon');
@@ -77,6 +79,7 @@ app.get('/settings', views.settings);
 
 // Load / Update / Delete stuff with mongo
 app.get('/rest/articles', articles.getarticles);
+app.get('/rest/stock', stock.getstock);
 app.get('/rest/article_id', articles.getOnearticle);
 app.get('/rest/resources', resources.getresources);
 
@@ -86,7 +89,7 @@ app.post('/rest/articles/add', articles.addarticle);
 
 // Delete
 app.delete('/rest/articles/delete', articles.delete);
-app.delete('/rest/articles/deleteall', articles.deleteall);
+app.delete('/rest/database/deleteall', database.deleteall);
 
 // redirect all others to the index
 app.get('*', views.home); //no funciona

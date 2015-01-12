@@ -24,6 +24,10 @@ app.controller('TabsController', ['$scope', '$location', function ($scope, $loca
     }
 }])
 
+app.controller('StockController', ['$scope', 'StockService', function ($scope, StockService) {
+ 	$scope.Stock = StockService;
+}]);
+
 app.controller('CSVController', ['$scope', 'ArticleService', function ($scope, ArticleService) {
 	$scope.getdata = function (articles) {
 		var headers = [{Code: 'Código', 

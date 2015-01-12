@@ -1,0 +1,32 @@
+<div class="panel-body">
+	<div>
+        <div class="col-sm-4 col-xs-8">
+		    <form role="search">
+		        <div class="form-group">
+		          <input type="text" class="form-control" 
+		          		 placeholder="Search" ng-model="query">
+		        </div>
+		    </form>
+		</div>
+	    <div ng-controller="CSVController" class="btn"
+		 style="background-color: rgb(139, 216, 139)"
+		 ng-csv="getdata(stock)" filename="Inventario.csv" add-bom="true"> 
+		 Extraer Excel 
+		</div> 
+	         
+	</div>
+
+    <br>
+    <hr>
+
+	<table class="table table-striped table-hover table-bordered">
+		<thead style="background-color: rgb(182, 180, 180)">
+		  <th ng-click="sort('Code')">Código </th>
+		  <th ng-click="sort('Description')">Descripción </th>
+		</thead>
+		<tr ng-repeat="article in stock">
+	    	<td>{{article.Code}}</td>
+	    	<td>{{article.Description}}</td>
+    	</tr>
+    </table>
+</div>
