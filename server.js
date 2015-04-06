@@ -2,19 +2,18 @@
  * Module dependencies
  */
 
+//Express
 var express = require('express');
+var app = express();
+
+// other Dependencies
 var morgan = require('morgan');
 var path = require('path');
 var ejslocals = require('ejs-locals');
 var mongo = require('mongodb');
+var mongodb = require('./database/mongo');
+var routes = require('./routes'); // Routes for our application
 
-//Routing files
-var mongodb = require('./server/mongo');
-var views = require('./server/views');
-var articles = require('./server/articles');
-var stock = require('./server/stock');
-var resources = require('./server/resources');
-var database = require('./server/database');
 
 //Middleware (used to be bundled with Express 3.0)
 var favicon = require('serve-favicon');
@@ -24,9 +23,6 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var errorHandler = require('errorhandler');
-
-//Express
-var app = module.exports = express();
 
 /**
  * Configuration
@@ -60,50 +56,20 @@ if (env === 'production') {
     // TODO
 }
 
-/**
- * Routes
- */
-
-//To get rid of the favicon.ico error
-app.get('/favicon.ico', views.faviconerror);
-
-
-// Render the different views for the different apps
-app.get('/', views.login);
-app.get('/home', views.home);
-app.get('/login', views.login);
-app.get('/sandbox', views.sandbox);
-app.get('/inventory', views.inventory);
-app.get('/production', views.production);
-app.get('/settings', views.settings);
-
-// Load / Update / Delete stuff with mongo
-app.get('/rest/articles', articles.getarticles);
-app.get('/rest/stock', stock.getstock);
-app.get('/rest/article_id', articles.getOnearticle);
-app.get('/rest/resources', resources.getresources);
-
-
-// Posts
-app.post('/rest/articles/add', articles.addarticle);
-
-// Delete
-app.delete('/rest/articles/delete', articles.delete);
-app.delete('/rest/database/deleteall', database.deleteall);
-
-// redirect all others to the index
-app.get('*', views.home); //no funciona
-
-
 /** 
  * Connect to Database and Start Server
  */
 
-mongodb.init(function (err, result) {
+mongodb.init(function (err, db) {
 	if (err) {
 		console.log(err);
 	} else {
+		
 		console.log("Connected to MongoDB! Yay!")
+		
+		// Routes
+		routes(app,db);
+		
 		app.listen(app.get('port'), function() {
 		    console.log('Express server listening on port ' + app.get('port'));
 		});

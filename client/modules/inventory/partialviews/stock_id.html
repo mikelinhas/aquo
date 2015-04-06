@@ -1,0 +1,37 @@
+<div>
+	<ol class="breadcrumb">
+	  <li><a href="#/stock"><i class="fa fa-undo"></i> stock</a></li>
+	  <li class="active">{{article._id}}</li>
+	</ol>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+		    <h3 class="panel-title"><strong>{{article.Code}}</strong> - {{article.Description}}</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>Stock:</h2>
+					<ul>
+						<li ng-repeat="warehouse in article.Stock">{{warehouse.Warehouse_id}} - {{warehouse.Quantity}}</li>
+						<li>TOTAL: {{ article.Stock | sumByKey:'Quantity' }}</li>
+					</ul>
+				</div>
+				<div class="col-sm-6" ng-show="article.imgsrc">
+					<img class="media-object" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="pull-right">
+					<button class="btn btn-primary" type="button">
+					    Editar
+					</button>
+					<button class="btn btn-danger" type="button"
+							style="margin-right: 10px" 
+							ng-click="deleteArticle(article._id)">
+					    Borrar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

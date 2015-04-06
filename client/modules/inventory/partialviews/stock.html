@@ -24,7 +24,9 @@
 		  <th ng-click="sort('Code')">Código </th>
 		  <th ng-click="sort('Description')">Descripción </th>
 		</thead>
-		<tr ng-repeat="article in stock">
+		<tr ng-repeat="article in stock | orderBy:predicate:reverse |
+							filter: query " 
+			ng-click="selectArticle(article, $event)">
 	    	<td>{{article.Code}}</td>
 	    	<td>{{article.Description}}</td>
     	</tr>
