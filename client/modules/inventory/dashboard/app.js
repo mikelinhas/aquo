@@ -1,17 +1,19 @@
- // --------------SERVICES ------------------
+var app = angular.module('app', ['ngRoute','ui.bootstrap', 'ngSanitize', 'ngCsv']);
 
-var app = angular.module('app');
+// --------------  CONTROLLERS ------------------
 
-app.service('CategoryService', function() {
+app.controller('DashboardController', ['$scope', 'StockService', 'ArticleService', function ($scope, StockService, ArticleService) {
+ 	$scope.Stock = StockService;
+ 	$scope.Articles = ArticleService;
 
-	this.categories = [{name:'Embalaje', symbol:'fa fa-archive', color:'#254A6B'},
-					  {name:'Producto Quimico', symbol:'fa-flask', color:'#254A6B'},
-					  {name:'Producto Intermedio', symbol:'fa-cogs', color:'#254A6B'},
-					  {name:'Producto Final', symbol:'fa-shopping-cart', color:'#254A6B'},
-					  {name:'Film', symbol:'fa-cab', color:'#254A6B'},
-					  {name: 'Cliente', symbol: 'fa-user', color:'#254A6B'}];
+ 	$scope.search = function (query){
+ 		StockService.search(query);
+ 	}
+}]);
 
-});
+
+
+// -------------  SERVICES  ---------------------
 
 app.service('StockService', function ($rootScope, HTTPService) {
     $rootScope.stock = [];
@@ -32,7 +34,6 @@ app.service('StockService', function ($rootScope, HTTPService) {
 });
 
 app.service('ArticleService', function ($rootScope, $http, HTTPService, filterFilter) {
-
 
 	// GET THE ARTICLES
 	$rootScope.articles = [];
@@ -63,74 +64,12 @@ app.service('ArticleService', function ($rootScope, $http, HTTPService, filterFi
 
 });
 
-app.service('ArticleViewService', function ($rootScope, HTTPService) {
-
-
-    // GET THE ARTICLES
-    $rootScope.article = [];
-
-    this.loadRemoteData = function (id) {
-        HTTPService.getOneArticle(id).then( function (response) {
-            $rootScope.article = response;
-        });
-    };
-
-    // function deleteArticle (id) {
-    //     HTTPService.deleteArticle(id).then( function (response) {
-    //         return response;
-    //     });
-    // };
-
-});
-
 app.service('HTTPService', function ($http, $q) {
 
 	return({getArticles: getArticles,
             getStock: getStock,
             queryStock: queryStock,
-			getOneArticle: getOneArticle,
-			addArticle: addArticle,
-			deleteArticle: deleteArticle});
-
-	function deleteArticle (id) {
-		var request = $http({
-			method: "delete",
-			url: "/rest/articles/delete",
-			params: {
-				action: "delete"
-			},
-			data: {
-				id: id
-			},
-		    headers: {"Content-Type": "application/json;charset=utf-8"}
-		});
-		return( request.then( handleDeleteSuccess, handleError ))
-	}
-
-    function handleDeleteSuccess( response ) {
-    	return( response.status );
-    }
-
-    function addArticle( article ) {
-        var request = $http({
-            method: "post",
-            url: "rest/articles/add",
-            params: {
-                action: "post"
-            },
-            data: {
-                Code: article.Code,
-                Description: article.Description,
-                Category: article.Category,
-                Subcategory: article.Subcategory
-            }
-        });
-        return( request.then( handlePostSuccess, handleError ) );
-    }
-
-    function handlePostSuccess( response ) {
-    	return( response.status );
-    }
+			getOneArticle: getOneArticle});
 
     function getArticles() {
         var request = $http({

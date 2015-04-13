@@ -6,22 +6,23 @@ var Db     = mongo.Db;
 var BSON   = mongo.BSONPure;
 var MongoClient = mongo.MongoClient;
 var MONGOHQ_URL="mongodb://mike:1234@dogen.mongohq.com:10023/app31033205";
+//var MONGOHQ_URL= 'mongodb://localhost:27017/aquodb';
 var db;
 
 // Init
     exports.init = function(cb){
             //db.open(cb);
             console.log("connecting to MongoDB...");
-            MongoClient.connect(MONGOHQ_URL, {
-                server: {
-                    auto_reconnect: true,
-                    socketOptions: {
-                        connectTimeoutMS: 3000,
-                        socketTimeoutMS:  3000,
-                        keepAlive:        3000
-                    }
-                }
-            }, function(err, dbinstance) {
+            MongoClient.connect(MONGOHQ_URL, 
+                // {server: {
+                //     auto_reconnect: true,
+                //     socketOptions: {
+                //         connectTimeoutMS: 3000,
+                //         socketTimeoutMS:  3000,
+                //         keepAlive:        3000
+                //     }
+                // }}, 
+                function(err, dbinstance) {
                     if (err){
                         //log(err);
                         cb(err,0);

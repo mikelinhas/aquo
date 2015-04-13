@@ -48,14 +48,18 @@
          ng-include src="'modules/inventory/partialviews/navbar.html'">
     </div>
 
-    <div class="container" ng-controller="TabsController">
+    <div class="container">
       <ul class="nav nav-pills" role="tablist">
-        <li ng-repeat="tab in tabs" 
-            ng-class="{active:isActiveTab(tab.n)}" 
-            ng-click="onClickTab(tab)"><a href="{{tab.url}}">{{tab.title}}</a>
+        <li class="active">
+          <a href="/inventory">Dashboard</a>
+        </li>
+        <li class="active">
+          <a href="/inventory/stock">Stock</a>
+        </li>
+        <li class="active">
+          <a href="/inventory">Database</a>
         </li>
       </ul>
-    <hr>
     </div>
 
     

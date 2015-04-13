@@ -24,8 +24,13 @@ app.controller('TabsController', ['$scope', '$location', function ($scope, $loca
     }
 }])
 
-app.controller('StockController', ['$scope', 'StockService', function ($scope, StockService) {
+app.controller('StockController', ['$scope', 'StockService', 'ArticleService', function ($scope, StockService, ArticleService) {
  	$scope.Stock = StockService;
+ 	$scope.Articles = ArticleService;
+
+ 	$scope.search = function (query){
+ 		StockService.search(query);
+ 	}
 }]);
 
 app.controller('CSVController', ['$scope', 'ArticleService', function ($scope, ArticleService) {
